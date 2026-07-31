@@ -18,14 +18,24 @@ def home(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            contact = form.save()
-            _notify_new_lead(contact)
-            # No messages.success() here: the redirect target (contact_success)
-            # renders its own confirmation and never displays the messages
-            # queue, so a flashed message here would otherwise leak onto
-            # whatever page the visitor views next.
-            return redirect("core:home_success")
-        messages.error(request, "Please correct the errors below and resubmit.")
+            try:
+                contact = form.save()
+            except Exception:
+                logger.exception("Failed to save contact form submission")
+                messages.error(
+                    request,
+                    "Something went wrong saving your message. Please email "
+                    "vivkverma905@gmail.com directly and I'll get back to you.",
+                )
+            else:
+                _notify_new_lead(contact)
+                # No messages.success() here: the redirect target (contact_success)
+                # renders its own confirmation and never displays the messages
+                # queue, so a flashed message here would otherwise leak onto
+                # whatever page the visitor views next.
+                return redirect("core:home_success")
+        else:
+            messages.error(request, "Please correct the errors below and resubmit.")
     else:
         form = ContactForm()
 

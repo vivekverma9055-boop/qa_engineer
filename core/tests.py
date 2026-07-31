@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
@@ -77,6 +79,28 @@ class ContactFormSubmissionTests(TestCase):
         response = self.client.post(reverse("core:home"), data=payload)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(ContactMessage.objects.count(), 0)
+
+    def test_db_save_failure_shows_error_instead_of_500(self):
+        # Regression: a failing form.save() (e.g. a database error in
+        # production) used to be unhandled and crashed the request with a
+        # raw 500 instead of degrading gracefully.
+        with patch(
+            "core.forms.ContactForm.save", side_effect=Exception("simulated db failure")
+        ):
+            response = self.client.post(reverse("core:home"), data=self.valid_payload)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Something went wrong saving your message")
+        self.assertEqual(ContactMessage.objects.count(), 0)
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_email_failure_does_not_block_success_redirect(self):
+        # The DB write is the source of truth; a broken SMTP config
+        # shouldn't stop a successfully-saved lead from reaching the
+        # thank-you page.
+        with patch("core.views.send_mail", side_effect=Exception("simulated smtp failure")):
+            response = self.client.post(reverse("core:home"), data=self.valid_payload)
+        self.assertRedirects(response, reverse("core:home_success"))
+        self.assertEqual(ContactMessage.objects.count(), 1)
 
 
 class ContactMessageModelTests(TestCase):
