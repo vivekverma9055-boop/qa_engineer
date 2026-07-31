@@ -1,7 +1,7 @@
 services:
   - type: web
     name: vivek-qa-portfolio
-    runtime: python
+    env: python
     plan: free
     buildCommand: "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput && python manage.py seed_knowledgebase"
     startCommand: "gunicorn config.wsgi"
