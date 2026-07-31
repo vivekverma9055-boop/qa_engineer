@@ -1,7 +1,7 @@
 from unittest.mock import patch
 
 from django.core import mail
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from chatbot.models import KnowledgeBase
@@ -98,6 +98,25 @@ class ContactFormSubmissionTests(TestCase):
         # shouldn't stop a successfully-saved lead from reaching the
         # thank-you page.
         with patch("core.views.send_mail", side_effect=Exception("simulated smtp failure")):
+            response = self.client.post(reverse("core:home"), data=self.valid_payload)
+        self.assertRedirects(response, reverse("core:home_success"))
+        self.assertEqual(ContactMessage.objects.count(), 1)
+
+    @override_settings(RESEND_API_KEY="test-key", RESEND_FROM_EMAIL="onboarding@resend.dev")
+    def test_uses_resend_api_when_configured(self):
+        with patch("core.views.requests.post") as mock_post:
+            mock_post.return_value.raise_for_status.return_value = None
+            response = self.client.post(reverse("core:home"), data=self.valid_payload)
+
+        self.assertRedirects(response, reverse("core:home_success"))
+        mock_post.assert_called_once()
+        _, kwargs = mock_post.call_args
+        self.assertEqual(kwargs["headers"]["Authorization"], "Bearer test-key")
+        self.assertIn("Jane Client", kwargs["json"]["text"])
+
+    @override_settings(RESEND_API_KEY="test-key")
+    def test_resend_failure_does_not_block_success_redirect(self):
+        with patch("core.views.requests.post", side_effect=Exception("simulated network block")):
             response = self.client.post(reverse("core:home"), data=self.valid_payload)
         self.assertRedirects(response, reverse("core:home_success"))
         self.assertEqual(ContactMessage.objects.count(), 1)

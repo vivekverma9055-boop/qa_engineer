@@ -18,6 +18,15 @@ services:
         value: "Asia/Kolkata"
       - key: CONTACT_RECEIVER_EMAIL
         value: "vivkverma905@gmail.com"
+      # Resend sends over HTTPS, not a raw SMTP socket -- Render's free tier
+      # appears to block outbound SMTP entirely, so this is the path that
+      # actually works here. See core/views.py _send_via_resend.
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        value: "onboarding@resend.dev"
+      # SMTP settings kept as a fallback path (used only if RESEND_API_KEY is
+      # unset) -- not relied on for delivery on this host.
       - key: EMAIL_BACKEND
         value: "django.core.mail.backends.smtp.EmailBackend"
       - key: EMAIL_HOST
@@ -26,6 +35,8 @@ services:
         value: "587"
       - key: EMAIL_USE_TLS
         value: "True"
+      - key: EMAIL_TIMEOUT
+        value: "10"
       - key: EMAIL_HOST_USER
         sync: false
       - key: EMAIL_HOST_PASSWORD

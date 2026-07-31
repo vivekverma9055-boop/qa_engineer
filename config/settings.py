@@ -130,6 +130,13 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default=EMAIL_HOST_USER)
 CONTACT_RECEIVER_EMAIL = config("CONTACT_RECEIVER_EMAIL", default="vivkverma905@gmail.com")
 
+# Resend (https://resend.com) sends over a plain HTTPS API call instead of a
+# raw SMTP socket, which sidesteps hosts (like Render's free tier) that block
+# outbound SMTP ports. When set, core.views prefers this over Django's SMTP
+# backend for the contact-form notification email specifically.
+RESEND_API_KEY = config("RESEND_API_KEY", default="")
+RESEND_FROM_EMAIL = config("RESEND_FROM_EMAIL", default="onboarding@resend.dev")
+
 # Production hardening (only kicks in when DEBUG=False)
 if not DEBUG:
     # Render/Railway/PythonAnywhere-style hosts terminate TLS at a proxy and

@@ -1,5 +1,6 @@
 import logging
 
+import requests
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -11,6 +12,8 @@ from chatbot.models import KnowledgeBase
 from .forms import ContactForm
 
 logger = logging.getLogger(__name__)
+
+RESEND_TIMEOUT_SECONDS = 10
 
 
 @ensure_csrf_cookie
@@ -59,6 +62,41 @@ def _notify_new_lead(contact):
         f"Budget: {contact.budget or '-'}\n\n"
         f"Message:\n{contact.message}"
     )
+
+    if settings.RESEND_API_KEY:
+        _send_via_resend(subject, body)
+    else:
+        _send_via_smtp(subject, body)
+
+
+def _send_via_resend(subject, body):
+    """Send over Resend's HTTPS API instead of raw SMTP.
+
+    Hosts like Render's free tier can block outbound SMTP ports outright, in
+    which case a socket connect attempt hangs until the WSGI worker's own
+    timeout force-kills it with SystemExit -- which isn't a subclass of
+    Exception, so no try/except here could ever catch it. A plain HTTPS POST
+    doesn't have that failure mode, and still degrades gracefully (via the
+    try/except below) for anything else that can go wrong.
+    """
+    try:
+        response = requests.post(
+            "https://api.resend.com/emails",
+            headers={"Authorization": f"Bearer {settings.RESEND_API_KEY}"},
+            json={
+                "from": settings.RESEND_FROM_EMAIL,
+                "to": [settings.CONTACT_RECEIVER_EMAIL],
+                "subject": subject,
+                "text": body,
+            },
+            timeout=RESEND_TIMEOUT_SECONDS,
+        )
+        response.raise_for_status()
+    except Exception:  # pragma: no cover - never break the request over email issues
+        logger.exception("Failed to send contact-form notification email via Resend")
+
+
+def _send_via_smtp(subject, body):
     try:
         send_mail(
             subject,
@@ -68,4 +106,4 @@ def _notify_new_lead(contact):
             fail_silently=True,
         )
     except Exception:  # pragma: no cover - never break the request over email issues
-        logger.exception("Failed to send contact-form notification email")
+        logger.exception("Failed to send contact-form notification email via SMTP")

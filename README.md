@@ -66,17 +66,31 @@ All page copy lives in `core/templates/core/home.html`. Styling is in
 
 ## Receiving contact-form emails
 By default, email just prints to the console (`EMAIL_BACKEND` = console backend) so you
-can test locally without real credentials. To get real email notifications in
-production, set these in `.env` (or your host's environment variables):
-```
-EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
-EMAIL_HOST_USER=your-gmail-address@gmail.com
-EMAIL_HOST_PASSWORD=your-gmail-app-password   # Google Account > Security > App Passwords
-DEFAULT_FROM_EMAIL=your-gmail-address@gmail.com
-CONTACT_RECEIVER_EMAIL=vivkverma905@gmail.com
-```
-Even without email configured, every submission is always saved in the database and
-visible in `/admin/`.
+can test locally without real credentials. Even without email configured at all, every
+submission is always saved in the database and visible in `/admin/` — email is a
+convenience notification, not the source of truth.
+
+**In production, use Resend, not raw SMTP.** Render's free tier (and likely other
+free-tier PaaS hosts) blocks outbound SMTP connections — a raw `socket.connect()` to
+`smtp.gmail.com:587` just hangs until the WSGI worker's own timeout force-kills the
+process. Resend sends over a normal HTTPS API call instead, which isn't affected:
+
+1. Sign up at [resend.com](https://resend.com) (free tier: 3,000 emails/month, no card
+   needed) using the same address you want to receive leads at
+   (`vivkverma905@gmail.com`) — without a verified custom domain, Resend's sandbox
+   sender (`onboarding@resend.dev`) can only deliver *to* the account's own address,
+   which is exactly what this app needs since every notification goes to one fixed
+   inbox anyway.
+2. Generate an API key (Dashboard → API Keys).
+3. Set in `.env` / your host's environment variables:
+   ```
+   RESEND_API_KEY=re_your_key_here
+   RESEND_FROM_EMAIL=onboarding@resend.dev
+   CONTACT_RECEIVER_EMAIL=vivkverma905@gmail.com
+   ```
+`core/views.py` checks `RESEND_API_KEY` first and only falls back to the SMTP settings
+below it if that's unset — so local dev (console backend) and Resend in production can
+both be configured without touching code.
 
 ## CI/CD pipeline
 
