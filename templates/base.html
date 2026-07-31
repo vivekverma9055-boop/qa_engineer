@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Vivek Verma | QA Automation Engineer / SDET — Web, Mobile & API Testing{% endblock %}</title>
+<meta name="description" content="Vivek Verma — ISTQB certified QA Automation Engineer / SDET offering manual & automation testing for web, mobile, API and device/IoT products. Selenium, Appium, Python, Postman.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a class="brand" href="{% url 'core:home' %}">VIVEK<span>VERMA</span><small>QA · SDET</small></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" id="siteNav">
+      <a href="#about">About</a>
+      <a href="#devices">Devices</a>
+      <a href="#demo">Demo</a>
+      <a href="#services">Process</a>
+      <a href="#experience">Experience</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Start a Project</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <div class="brand small">VIVEK<span>VERMA</span></div>
+      <p>QA Automation Engineer / SDET — helping global teams ship defect-free web, mobile, API and device software.</p>
+    </div>
+    <div class="footer-links">
+      <a href="tel:+917860752096">+91 7860752096</a>
+      <a href="mailto:vivkverma905@gmail.com">vivkverma905@gmail.com</a>
+      <a href="https://linkedin.com/in/vivek-verma-sdet" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>&copy; {% now "Y" %} Vivek Verma. All rights reserved.</span>
+    <span>Based in Lucknow, India · Working remotely with clients worldwide</span>
+  </div>
+</footer>
+
+<a href="#contact" class="floating-cta">Start a Project →</a>
+
+{% include "chatbot/widget.html" %}
+
+<script src="{% static 'core/js/main.js' %}"></script>
+</body>
+</html>

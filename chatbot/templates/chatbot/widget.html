@@ -1,0 +1,28 @@
+{% load static %}
+<div class="chat-widget" id="chatWidget">
+  <button class="chat-toggle" id="chatToggle" aria-label="Open help chat">
+    <span class="chat-toggle-icon">💬</span>
+  </button>
+
+  <div class="chat-panel" id="chatPanel" hidden>
+    <div class="chat-panel-header">
+      <div>
+        <strong>Ask about my QA services</strong>
+        <span>Usually answers instantly · escalates to email if unsure</span>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg chat-msg-bot">
+        Hi! I'm Vivek's help assistant. Ask me about services, devices I test,
+        pricing, timelines, or how to get started — I'll do my best, and if I
+        don't know, Vivek will follow up personally.
+      </div>
+    </div>
+    <form class="chat-input-row" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Type your question..." autocomplete="off" maxlength="500">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</div>
+<script src="{% static 'chatbot/chat.js' %}"></script>

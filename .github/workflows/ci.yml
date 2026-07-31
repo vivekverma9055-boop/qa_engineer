@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check for missing migrations
+        run: python manage.py makemigrations --check --dry-run
+        env:
+          SECRET_KEY: ci-test-secret-key
+          DEBUG: "True"
+
+      - name: Django system checks
+        run: python manage.py check
+        env:
+          SECRET_KEY: ci-test-secret-key
+          DEBUG: "True"
+
+      - name: Run test suite
+        run: python manage.py test
+        env:
+          SECRET_KEY: ci-test-secret-key
+          DEBUG: "True"
+
+      - name: Verify static files collect cleanly
+        run: python manage.py collectstatic --noinput
+        env:
+          SECRET_KEY: ci-test-secret-key
+          DEBUG: "False"
+          ALLOWED_HOSTS: "localhost"

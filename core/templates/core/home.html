@@ -1,0 +1,506 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">Freelance QA &amp; Device Testing Lab · Now Accepting New Projects</span>
+      <h1>Before your users find the bugs,<br><span class="accent">I do.</span></h1>
+      <p class="hero-sub">
+        I'm Vivek Verma — a freelance QA Automation Engineer / SDET who tests your product the way
+        real users and real devices will actually use it: on the web, on laptops, on Android &amp; iOS
+        phones, on cameras and connected hardware, and everywhere your APIs talk to each other.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">🎓 ISTQB Certified (CTFL)</span>
+        <span class="badge">🧪 2+ Yrs Experience</span>
+        <span class="badge">🌍 Remote-first, US/UK-hours friendly</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+        <a href="mailto:vivkverma905@gmail.com" class="btn btn-ghost">Email Me</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-row"><span>📍 Location</span><b>Lucknow, India (Remote Worldwide)</b></div>
+      <div class="hero-card-row"><span>📞 Phone</span><b>+91 7860752096</b></div>
+      <div class="hero-card-row"><span>✉️ Email</span><b>vivkverma905@gmail.com</b></div>
+      <div class="hero-card-row"><span>🔗 LinkedIn</span><b>/in/vivek-verma-sdet</b></div>
+      <div class="hero-card-row"><span>🛠️ Stack</span><b>Selenium · Appium · Python · Postman</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <h2 class="section-title">Why work with me</h2>
+    <p class="section-lead">
+      Most freelance testers can click through a UI. Fewer can also build the automation framework
+      behind it, validate what's actually stored in the database, and put a real device in their
+      hand to check it. That combination is what I bring to every engagement.
+    </p>
+    <ul class="check-list">
+      <li>I build automation frameworks from scratch — Selenium, Appium, Python &amp; Pytest — rather than just running someone else's scripts, so your suite is yours to keep and extend.</li>
+      <li>I check the data, not just the screen: API validation with Postman and backend verification in MongoDB/SQL, so bugs hiding behind the UI don't slip through.</li>
+      <li>I've tested on real hardware, not just simulators — Android VoIP/telecom devices, firmware regression, call workflows and caption accuracy for accessibility users.</li>
+      <li>I write test plans and defect reports clients can actually act on, tracked in JIRA/Xray, with clean handoff at the end of every sprint.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- WHAT I TEST -->
+<section class="section section-alt" id="devices">
+  <div class="container">
+    <h2 class="section-title">Platforms &amp; Devices I Test</h2>
+    <p class="section-lead">If it has a screen, an API, or a firmware update, I can put together a test plan for it.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-icon">🖥️</div>
+        <h3>Web &amp; Desktop UI</h3>
+        <p>Cross-browser testing on laptops/desktops, responsive layout checks, and functional/regression coverage for web apps.</p>
+        <div class="card-matrix">Chrome · Firefox · Edge · Safari (latest 2 versions) — Windows &amp; macOS</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h3>Android &amp; iOS Apps</h3>
+        <p>Real-device and emulator testing for native and hybrid mobile apps, with Appium automation for both platforms.</p>
+        <div class="card-matrix">Pixel 6–8, Samsung Galaxy S21–S24 · iPhone 12–15 (iOS 16+)</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📷</div>
+        <h3>Cameras &amp; Connected Hardware</h3>
+        <p>Hands-on validation of camera and IoT hardware — connectivity, real-world workflows, and firmware regression across releases.</p>
+        <div class="card-matrix">Autofocus, exposure, flash, capture/playback pipeline, firmware updates</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📟</div>
+        <h3>VoIP &amp; Telecom Devices</h3>
+        <p>End-to-end device automation with Appium &amp; ADB — call workflows, audio, caption accuracy, and settings/hardware integration.</p>
+        <div class="card-matrix">Android-based VoIP hardware, call routing, live-caption accuracy</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔌</div>
+        <h3>APIs &amp; Integrations</h3>
+        <p>Postman-based request/response validation, edge cases, and third-party integration testing (e.g. ATS/CRM-style workflows).</p>
+        <div class="card-matrix">REST/JSON, status codes, auth flows, rate limits, webhook callbacks</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🗄️</div>
+        <h3>Backend &amp; Databases</h3>
+        <p>MongoDB &amp; SQL query-level checks so what's stored matches what the UI and API actually report.</p>
+        <div class="card-matrix">MongoDB collections, SQL joins/constraints, data-integrity checks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section" id="demo">
+  <div class="container">
+    <h2 class="section-title">Automated Testing, In Action</h2>
+    <p class="section-lead">A simulated look at what an automation run across your product could look like.</p>
+
+    <div class="demo-panel">
+      <div class="demo-devices">
+        <span class="demo-device active" data-device="web"><span class="demo-device-icon">🖥️</span><small>Web</small></span>
+        <span class="demo-device" data-device="android"><span class="demo-device-icon">🤖</span><small>Android</small></span>
+        <span class="demo-device" data-device="ios"><span class="demo-device-icon">🍎</span><small>iOS</small></span>
+        <span class="demo-device" data-device="api"><span class="demo-device-icon">🔌</span><small>API</small></span>
+        <span class="demo-device" data-device="hardware"><span class="demo-device-icon">📷</span><small>Hardware</small></span>
+      </div>
+
+      <div class="demo-terminal">
+        <div class="demo-terminal-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <b>automation_run.py</b>
+        </div>
+        <div class="demo-terminal-body" id="demoLines"></div>
+        <div class="demo-progress"><div class="demo-progress-fill" id="demoProgressFill"></div></div>
+        <div class="demo-stats">
+          <span class="demo-pass">✓ <b id="demoPassCount">0</b> Passed</span>
+          <span class="demo-fail">✕ <b id="demoFailCount">0</b> Failed</span>
+        </div>
+      </div>
+    </div>
+    <p class="demo-disclaimer">Illustrative simulation, not live footage — ask me for a real test report from an actual project.</p>
+  </div>
+</section>
+
+<!-- MANUAL TESTING DEMO -->
+<section class="section section-alt" id="manual-demo">
+  <div class="container">
+    <h2 class="section-title">Manual Testing: Camera &amp; Android Devices</h2>
+    <p class="section-lead">A simulated walkthrough of a real manual test pass on a camera app and an Android device.</p>
+
+    <div class="manual-demo-grid">
+      <div class="phone-mock">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-app-icon" id="phoneIcon">📷</div>
+          <div class="phone-status" id="phoneStatus">Launching camera app…</div>
+        </div>
+        <div class="phone-home-bar"></div>
+      </div>
+
+      <div class="checklist-panel">
+        <h4>Manual Test Checklist</h4>
+        <ul class="checklist" id="manualChecklist"></ul>
+      </div>
+    </div>
+    <p class="demo-disclaimer">Illustrative simulation of a manual test pass — not live device footage.</p>
+  </div>
+</section>
+
+<!-- SAMPLE DELIVERABLE -->
+<section class="section" id="deliverable">
+  <div class="container">
+    <h2 class="section-title">What You Actually Get</h2>
+    <p class="section-lead">Every engagement comes with documentation like this — traceable test cases, priority/severity, and clear pass/fail evidence, not a vague "looks fine to me."</p>
+
+    <div class="tc-table-wrap">
+      <table class="tc-table">
+        <thead>
+          <tr>
+            <th>TC ID</th>
+            <th>Module</th>
+            <th>Steps</th>
+            <th>Expected Result</th>
+            <th>Priority</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TC-047</td>
+            <td>Camera — Autofocus</td>
+            <td>Open camera app → point at subject → tap shutter</td>
+            <td>Autofocus locks within 1s; captured image is sharp</td>
+            <td>High</td>
+            <td><span class="tc-status tc-pass">Pass</span></td>
+          </tr>
+          <tr>
+            <td>TC-048</td>
+            <td>Login — Invalid Password</td>
+            <td>Enter valid email → enter wrong password → tap Login</td>
+            <td>Shows "Incorrect password" toast; no crash</td>
+            <td>Critical</td>
+            <td><span class="tc-status tc-pass">Pass</span></td>
+          </tr>
+          <tr>
+            <td>TC-052</td>
+            <td>Checkout API</td>
+            <td>POST /api/v1/checkout with an expired auth token</td>
+            <td>Returns 401 Unauthorized; no 500 error</td>
+            <td>Critical</td>
+            <td><span class="tc-status tc-fail">Fail — Sev-2 logged</span></td>
+          </tr>
+          <tr>
+            <td>TC-061</td>
+            <td>Android — Rotation</td>
+            <td>Start video recording → rotate device 90°</td>
+            <td>Recording continues uninterrupted; layout re-flows correctly</td>
+            <td>Medium</td>
+            <td><span class="tc-status tc-pass">Pass</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="demo-disclaimer">Sample format for illustration — every real engagement gets its own test cases mapped to your actual PRD/requirements.</p>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section section-alt" id="services">
+  <div class="container">
+    <h2 class="section-title">How We'll Work Together</h2>
+    <p class="section-lead">A straightforward process, whether it's a one-week manual test pass or an ongoing automation retainer.</p>
+    <div class="grid grid-4 process-grid">
+      <div class="card process-card">
+        <div class="process-step">01</div>
+        <h3>Discovery Call</h3>
+        <p>We talk through your product, timelines and what "quality" needs to mean for this release.</p>
+      </div>
+      <div class="card process-card">
+        <div class="process-step">02</div>
+        <h3>Test Plan &amp; Quote</h3>
+        <p>You get a written test plan (or automation scope) and a clear quote before any work starts.</p>
+      </div>
+      <div class="card process-card">
+        <div class="process-step">03</div>
+        <h3>Execution</h3>
+        <p>Manual testing, automation build-out, API/DB validation — with regular status updates, not radio silence.</p>
+      </div>
+      <div class="card process-card">
+        <div class="process-step">04</div>
+        <h3>Report &amp; Handoff</h3>
+        <p>Defect reports, coverage summary, and (for automation) a suite you and your team can keep running.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="container">
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="grid grid-2 skills-grid">
+      <div class="skill-block">
+        <h4>Programming</h4>
+        <div class="chips"><span class="chip">Python</span></div>
+      </div>
+      <div class="skill-block">
+        <h4>Web Frameworks</h4>
+        <div class="chips"><span class="chip">Django</span></div>
+      </div>
+      <div class="skill-block">
+        <h4>Automation Frameworks</h4>
+        <div class="chips">
+          <span class="chip">Selenium WebDriver</span>
+          <span class="chip">Appium</span>
+          <span class="chip">Pytest</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>API &amp; Backend Testing</h4>
+        <div class="chips">
+          <span class="chip">Postman</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">SQL</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Tools &amp; Platforms</h4>
+        <div class="chips">
+          <span class="chip">JIRA</span>
+          <span class="chip">Xray</span>
+          <span class="chip">Git</span>
+          <span class="chip">Bitbucket</span>
+          <span class="chip">Shortcut</span>
+          <span class="chip">AWS</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Operating Systems</h4>
+        <div class="chips">
+          <span class="chip">Windows</span>
+          <span class="chip">Linux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section section-alt" id="experience">
+  <div class="container">
+    <h2 class="section-title">Work Experience</h2>
+
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-head">
+          <h3>Software Engineer (QA Automation)</h3>
+          <span class="timeline-date">Aug 2025 – Present</span>
+        </div>
+        <p class="timeline-org">G CREW Solutions Pvt. Ltd. (Jobsync)</p>
+        <ul class="check-list">
+          <li>Engineered and validated features for JS HUB and SimpleAPI across UI, back-end APIs and database layers; executed API testing with Postman and verified data integrity in MongoDB/SQL.</li>
+          <li>Orchestrated end-to-end workflow using Git/Bitbucket and sprint tracking in Shortcut under Agile methodology.</li>
+          <li>Partnered directly with clients for requirement analysis, defect reporting and feature validation.</li>
+        </ul>
+
+        <div class="project-box">
+          <h4>JS HUB — Relay Email Configuration &amp; Resume Email Extraction</h4>
+          <p>Validated a UI for configuring relay email rules from job boards with domain-matching logic to auto-extract candidate emails from resumes. Ran end-to-end functional &amp; integration testing across the full pipeline and resolved production defects with the client.</p>
+        </div>
+        <div class="project-box">
+          <h4>SimpleAPI — ATS Integration &amp; Custom Question Validation</h4>
+          <p>Tested ATS workflows for custom-question retrieval, candidate application processing and submission back to ATS. Built a change-detection alert system for ATS question updates and validated API responses (Postman) and MongoDB records, resolving client-reported submission failures.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-head">
+          <h3>QA Automation Engineer</h3>
+          <span class="timeline-date">Aug 2024 – Aug 2025</span>
+        </div>
+        <p class="timeline-org">VVDN Technologies Pvt. Ltd.</p>
+        <ul class="check-list">
+          <li>Designed test plans and cases from PRDs for web and mobile applications.</li>
+          <li>Built automation frameworks with Selenium, Appium, Python and Pytest, increasing coverage and cutting manual effort.</li>
+          <li>Ran functional, UI and regression testing; managed defects in JIRA (Xray); validated Firebase/BigQuery data integrity.</li>
+          <li>Performed smoke &amp; sanity testing each release cycle to ensure stability across builds and environments.</li>
+        </ul>
+
+        <div class="project-box">
+          <h4>Smart Fit (SFIT) — Web Application Test Automation</h4>
+          <p>Architected a scalable Selenium + Pytest framework from scratch covering User Management, Projects, Scheduling, Help Center and GenAI modules. Managed cycles in JIRA/Xray and validated frontend-backend integration via Postman.</p>
+        </div>
+        <div class="project-box">
+          <h4>ClearCaptions — VoIP Captioning Telephone Device Automation</h4>
+          <p>Automated end-to-end testing of an Android-based VoIP captioning device with Appium &amp; ADB — Contacts, Favorites, Call Logs, Voicemail, Help and Settings — validating caption accuracy, call connectivity, audio and firmware stability.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS / ACHIEVEMENTS -->
+<section class="section" id="projects">
+  <div class="container">
+    <h2 class="section-title">Achievements</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>🧩 Automation Framework Development</h3>
+        <p>Built Selenium, Appium and Pytest frameworks from the ground up, improving coverage and reducing manual regression effort.</p>
+      </div>
+      <div class="card">
+        <h3>📲 Device Automation</h3>
+        <p>Automated Android VoIP device testing with Appium and ADB, ensuring firmware and call feature stability across releases.</p>
+      </div>
+      <div class="card">
+        <h3>🐞 Defect Management</h3>
+        <p>Tracked and drove defects to resolution in JIRA/Xray, keeping Agile sprints on schedule.</p>
+      </div>
+      <div class="card">
+        <h3>🤝 Cross-Functional Collaboration</h3>
+        <p>Partnered directly with developers and clients to debug issues, reproduce defects and validate fixes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS & EDUCATION -->
+<section class="section section-alt" id="certifications">
+  <div class="container">
+    <div class="grid grid-2">
+      <div>
+        <h2 class="section-title small">Certifications</h2>
+        <ul class="check-list">
+          <li>ISTQB Certified Tester Foundation Level (CTFL) — ISTQB</li>
+          <li>Python L1 Certification — VVDN Technologies</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="section-title small">Education</h2>
+        <ul class="check-list">
+          <li>B.Tech, Computer Science &amp; Engineering — School of Management Sciences, Lucknow (2024)</li>
+          <li>12th — SRTC Public School, Utraula, Balrampur (2020)</li>
+          <li>10th — M.J. Activity High School, Utraula, Balrampur (2017)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-lead">Answered here — and by the chat assistant in the corner, which learns new answers over time.</p>
+    <div class="faq-list">
+      {% for item in faqs %}
+        <details class="faq-item">
+          <summary>{{ item.question }}</summary>
+          <p>{{ item.answer }}</p>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <h2 class="section-title">Let's Work Together</h2>
+    <p class="section-lead">
+      Have a web, mobile, API or device product that needs solid QA? Tell me about your project —
+      I typically reply within 24 hours.
+    </p>
+
+    <div class="contact-grid">
+      <form method="post" class="contact-form" novalidate>
+        {% csrf_token %}
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+
+        <div class="form-row">
+          <div class="form-group">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {{ form.name.errors }}
+          </div>
+          <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.email.errors }}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            {{ form.company.label_tag }}
+            {{ form.company }}
+          </div>
+          <div class="form-group">
+            {{ form.country.label_tag }}
+            {{ form.country }}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            {{ form.service_needed.label_tag }}
+            {{ form.service_needed }}
+          </div>
+          <div class="form-group">
+            {{ form.budget.label_tag }}
+            {{ form.budget }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.message.label_tag }}
+          {{ form.message }}
+          {{ form.message.errors }}
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+      </form>
+
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <span>📞 Phone</span>
+          <a href="tel:+917860752096">+91 7860752096</a>
+        </div>
+        <div class="contact-info-item">
+          <span>✉️ Email</span>
+          <a href="mailto:vivkverma905@gmail.com">vivkverma905@gmail.com</a>
+        </div>
+        <div class="contact-info-item">
+          <span>🔗 LinkedIn</span>
+          <a href="https://linkedin.com/in/vivek-verma-sdet" target="_blank" rel="noopener">linkedin.com/in/vivek-verma-sdet</a>
+        </div>
+        <div class="contact-info-item">
+          <span>📍 Based in</span>
+          <b>Lucknow, India — serving clients worldwide, 100% remote</b>
+        </div>
+        <div class="contact-info-item">
+          <span>🕒 Availability</span>
+          <b>Accepting new projects now · Flexible with US/UK/EU time zones</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{% static 'core/js/demo.js' %}"></script>
+<script src="{% static 'core/js/manual-demo.js' %}"></script>
+{% endblock %}

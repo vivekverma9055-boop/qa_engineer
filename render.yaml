@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: vivek-qa-portfolio
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput && python manage.py seed_knowledgebase"
+    startCommand: "gunicorn config.wsgi"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+      - key: TIME_ZONE
+        value: "Asia/Kolkata"
+      - key: CONTACT_RECEIVER_EMAIL
+        value: "vivkverma905@gmail.com"
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.smtp.EmailBackend"
+      - key: EMAIL_HOST
+        value: "smtp.gmail.com"
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "True"
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        value: "vivkverma905@gmail.com"
